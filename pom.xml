@@ -190,8 +190,45 @@
     </dependency>
   </dependencies>
 
+
+  <profiles>
+    <!-- 默认开发环境 -->
+    <profile>
+      <id>
+        dev
+      </id>
+      <properties>
+        <env>dev</env>
+      </properties>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+    </profile>
+    <!-- 测试环境 -->
+    <profile>
+      <id>
+        test
+      </id>
+      <properties>
+        <env>test</env>
+      </properties>
+    </profile>
+    <!-- 生产环境 -->
+    <profile>
+      <id>
+        product
+      </id>
+      <properties>
+        <env>
+          product
+        </env>
+      </properties>
+    </profile>
+  </profiles>
+
+
   <build>
-    <finalName>shsxt_crm</finalName>
+    <finalName>crm</finalName>
     <!--
                 Maven 项目
                    如果源代码(src/main/java)存在xml  properties  tld 等文件  maven 默认不会自动编译该文件到输出目录
@@ -199,7 +236,7 @@
               -->
     <resources>
       <resource>
-        <directory>src/main/resources</directory>
+        <directory>src/main/resources/${env}</directory>
       </resource>
       <resource>
         <directory>src/main/java</directory>
@@ -242,7 +279,7 @@
         <configuration>
           <scanIntervalSeconds>10</scanIntervalSeconds>
           <contextPath>/crm</contextPath>
-          <webDefaultXml>src/main/resources/webdefault.xml</webDefaultXml>
+          <!--<webDefaultXml>src/main/resources/webdefault.xml</webDefaultXml>-->
         </configuration>
       </plugin>
     </plugins>
